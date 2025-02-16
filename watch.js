@@ -30,10 +30,10 @@
 $.fn.Watch = function (options) {
     if (ElementExist(this) == false) return false;
     var $set = $.extend({ format: '{hh}:{mm}:{ss}', before: '', after: '', get: false, type: 'html', past: 'start' }, options || {});
-    var int = (search_text($set.format, '{sss}')) ? 1 : 1000;
+    var int = ($set.format.indexOf('{sss}') !== (-1)) ? 1 : 1000;
     setInterval(() => {
         let date = new Date(), tmp, result = $set.format, month = date.getMonth(), daydate = date.getDate(), hours = date.getHours(), minutes = date.getMinutes(), seconds = date.getSeconds(), milliseconds = date.getMilliseconds();
-        if (search_text($set.format, 'eriod}')) {
+        if ($set.format.indexOf('eriod}') !== (-1)) {
             let pt = [0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5];
             let pn = [['полночь', 'ночь', 'утро', 'полдень', 'день', 'вечер'], ['Полночь', 'Ночь', 'Утро', 'Полдень', 'День', 'Вечер']];
             tmp = date.toLocaleString(navigator.language, { dayPeriod: 'long' });
@@ -42,13 +42,13 @@ $.fn.Watch = function (options) {
             result = result.replace('{dayPeriod}', tmp);
             result = result.replace('{period}', pn[0][pt[hours]]).replace('{Period}', pn[1][pt[hours]]);
         }
-        if (search_text($set.format, 'ay}')) {
+        if ($set.format.indexOf('ay}') !== (-1)) {
             tmp = date.toLocaleString(navigator.language, { weekday: 'long' });
             result = result.replace('{day}', tmp);
             tmp = tmp.charAt(0).toUpperCase() + tmp.slice(1);
             result = result.replace('{Day}', tmp);
         }
-        if (search_text($set.format, 'onth}')) {
+        if ($set.format.indexOf('onth}') !== (-1)) {
             tmp = date.toLocaleString(navigator.language, { month: 'long' });
             result = result.replace('{month}', tmp);
             tmp = tmp.charAt(0).toUpperCase() + tmp.slice(1);
