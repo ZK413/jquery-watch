@@ -28,7 +28,7 @@
  * @returns {boolean} `false` ошибка, `true` модуль выполняется.
  */
 $.fn.Watch = function (options) {
-    if (ElementExist(this) == false) return false;
+    if (this.length > 0) return false;
     var $set = $.extend({ format: '{hh}:{mm}:{ss}', before: '', after: '', get: false, type: 'html', past: 'start' }, options || {});
     var int = ($set.format.indexOf('{sss}') !== (-1)) ? 1 : 1000;
     setInterval(() => {
